@@ -15,7 +15,7 @@
 		
 	<packaging>jar</packaging>
 
-	<name>Im memory JNDI server</name>
-	<description>Simplest im memory JNDI server</description>	
+	<name>In memory JNDI server</name>
+	<description>Simplest in memory JNDI server</description>	
 
 </project>

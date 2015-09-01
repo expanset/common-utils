@@ -21,7 +21,7 @@
 	<url>https://expanset.com</url>	
 	
 	<scm>
-		<url>https://github.com/expanset/parent-pom</url>
+		<url>https://github.com/expanset/common-utils</url>
 		<connection>scm:git:https://github.com/expanset/common-utils</connection>
 		<developerConnection>scm:git:https://github.com/expanset/common-utils</developerConnection>
 		<tag>HEAD</tag>
@@ -46,11 +46,6 @@
 	</modules>
 		
 	<dependencies>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 	
 	<build>

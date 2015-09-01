@@ -15,8 +15,8 @@
 		
 	<packaging>jar</packaging>
 
-	<name>Jackson helpers</name>
-	<description>Jackson helpers</description>	
+	<name>JSON Jackson helpers</name>
+	<description>JSON Jackson helpers</description>	
 
 	<dependencies>
 		<dependency>
