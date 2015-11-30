@@ -74,12 +74,12 @@ public final class ExceptionAdapter {
 	public static <T> void run(Throwable cause, Iterable<T> items, Consumer<T> ... operations) {
     	assert items != null;
     	
-    	List<Throwable> errors = null;
+    	List<Exception> errors = null;
     	for(T item : items) {
 			for(Consumer<T> operation : operations) {
 	    		try {
 	    			operation.accept(item);	
-	    		} catch (Throwable e) {
+	    		} catch (Exception e) {
 	    			if(errors == null) {
 	    				errors = new ArrayList<>(2);
 	    			}

@@ -14,7 +14,7 @@ public class MultiErrorException extends RuntimeException {
 
 	protected final Object lock = new Object();
 
-    protected final List<Throwable> throwables = new LinkedList<Throwable>();
+    protected final List<Exception> throwables = new LinkedList<Exception>();
     
 	private final static long serialVersionUID = 1L;
 	
@@ -25,10 +25,10 @@ public class MultiErrorException extends RuntimeException {
     /**
      * @param errors List of error for this container.
      */
-    public MultiErrorException(List<Throwable> errors) {
+    public MultiErrorException(List<Exception> errors) {
         super(errors.get(0).getMessage(), errors.get(0));
 
-        for (Throwable error : errors) {
+        for (Exception error : errors) {
             if (error instanceof MultiErrorException) {
             	final MultiErrorException me = (MultiErrorException) error;                
                 throwables.addAll(me.throwables);
@@ -44,30 +44,19 @@ public class MultiErrorException extends RuntimeException {
      */
     public MultiErrorException(Throwable cause) {
         super(cause.getMessage(), cause);
-
-        if (cause instanceof MultiErrorException) {
-        	final MultiErrorException me = (MultiErrorException) cause;
-            throwables.addAll(me.throwables);
-        }
-        else {
-            throwables.add(cause);
-        }
     }
 
     /**
      * @param errors List of errors for this container.
      * @param cause Previous error.
      */
-    public MultiErrorException(List<Throwable> errors, Throwable cause) {
+    public MultiErrorException(List<Exception> errors, Throwable cause) {
         super(cause.getMessage(), cause);
 
-        for (Throwable error : errors) {
+        for (Exception error : errors) {
             if (error instanceof MultiErrorException) {
             	final MultiErrorException me = (MultiErrorException) error;                
                 throwables.addAll(me.throwables);
-            }
-            else {
-                throwables.add(error);
             }
         }
     }
@@ -75,7 +64,7 @@ public class MultiErrorException extends RuntimeException {
     /**
      * @return Error list in the container.
      */
-    public List<Throwable> getErrors() {
+    public List<Exception> getErrors() {
         synchronized (lock) {
             return Collections.unmodifiableList(new ArrayList<>(throwables));
         }
@@ -85,7 +74,7 @@ public class MultiErrorException extends RuntimeException {
      * Adds an error to this container.
      * @param error Error to add to this container.
      */
-    public void addError(Throwable error) {
+    public void addError(Exception error) {
     	assert error != null;
     	
         synchronized (lock) {
@@ -95,7 +84,7 @@ public class MultiErrorException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        final List<Throwable> listCopy = getErrors();
+        final List<Exception> listCopy = getErrors();
         final StringBuffer sb = new StringBuffer("A MultiErrorException has ");
         sb.append(listCopy.size());
         sb.append(" exceptions.  They are:");
@@ -115,7 +104,7 @@ public class MultiErrorException extends RuntimeException {
     
     @Override
     public void printStackTrace(PrintStream s) {
-        final List<Throwable> listCopy = getErrors();        
+        final List<Exception> listCopy = getErrors();        
         if (listCopy.size() <= 0) {
             super.printStackTrace(s);            
             return;
@@ -130,7 +119,7 @@ public class MultiErrorException extends RuntimeException {
     
     @Override
     public void printStackTrace(PrintWriter s) {
-        final List<Throwable> listCopy = getErrors();
+        final List<Exception> listCopy = getErrors();
         if (listCopy.size() <= 0) {
             super.printStackTrace(s);
             return;
